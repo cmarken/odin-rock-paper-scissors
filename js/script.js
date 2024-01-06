@@ -42,13 +42,26 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+/*
 const playerSelection = "scissors";
 const computerSelection = getComputerSelection();
 console.log('Player: ' + playerSelection + ' | Computer: ' + computerSelection + '\n');
 console.log(playRound(playerSelection, computerSelection));
+*/
 
 // Used to contain playRound. Should make us play 5 games in a row. Keep score of
 // winner.
 // Display each round's winner.
-// Display the winner after each round.
-// game()
+// Display the winner after all games.
+function game() {
+    // Set up array to keep track of winner
+
+    // Loop until we have played 5 games
+        // Ask player for the selection and store it in playerSelection
+        // get the computerSelection and store it
+        // Display the winner of the round
+
+    // Count the number of player wins and print it
+    // Count the number of computer wins and print it
+    // Display the total winner
+}
