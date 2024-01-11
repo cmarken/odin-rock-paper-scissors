@@ -14,13 +14,12 @@ function getComputerSelection() {
     return selections[randomNumber];
 }
 
-// play a round and compare choices from player and computer, return a string
-// that declares a winner. Player selection needs to be case insenitive.
-// Replay round if tie.
-function playRound(playerSelection, computerSelection) {
+
+function playRound(e) {
 
     // Make it case insensetive
-    playerSelection = playerSelection.toLocaleLowerCase();
+    const playerSelection = e.srcElement.value.toLocaleLowerCase();
+    const computerSelection = getComputerSelection();
 
     // Compare choices
     if (playerSelection === computerSelection) {
@@ -90,6 +89,11 @@ function game() {
     // Display the total winner
     console.log('\nTotal winner is: ' + totalWinner);
 }
+
+const selectionButtons = document.querySelectorAll('.selectionButton');
+selectionButtons.forEach(btn => {
+    btn.addEventListener('click', playRound);
+});
 
 game();
 
