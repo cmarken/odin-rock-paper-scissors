@@ -50,6 +50,7 @@ function game() {
     // Set up array to keep track of winner
     let winner = [];
 
+    /*
     // Loop until we have played 5 games
     for (let i = 1; i <= 5; i++) {
         // Ask player for the selection and store it in playerSelection
@@ -63,7 +64,7 @@ function game() {
 
         // Display the winner of the round
         console.log(winner[i]); 
-    }
+    }*/
 
     // Count number of wins for player and computer
     const playerWins = winner.filter(w => w === 'Player wins!').length;
