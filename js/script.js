@@ -1,4 +1,5 @@
-// randomly return 'Rock', 'Paper', 'Scissors'
+let playerWins, computerWins, draws;
+
 function getComputerSelection() {
     // Set up dictionary for the type of choices
     const selections = {
@@ -14,40 +15,55 @@ function getComputerSelection() {
     return selections[randomNumber];
 }
 
-
-function playRound(e) {
-
-    // Make it case insensetive
-    const playerSelection = e.srcElement.value.toLocaleLowerCase();
-    const computerSelection = getComputerSelection();
-
-    // Compare choices
+function determineWinner (playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         return 'It is a draw!';
     } else if (playerSelection === 'rock' && computerSelection === 'paper') {
         return 'Computer wins!';
     } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-        return 'Player wins!';
+        return 'Player Wins!';
     } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        return 'Player wins!';
+        return 'Player Wins!';
     } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-        return 'Computer wins!';
+        return 'Computer Wins!';
     } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        return 'Computer wins!';
+        return 'Computer Wins!';
     } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-        return 'Player wins!';
+        return 'Player Wins!';
     } else {
         return 'Something went wrong. I don\'t know who won!?';
     }
 }
 
-// Used to contain playRound. Should make us play 5 games in a row. Keep score of
-// winner.
-// Display each round's winner.
-// Display the winner after all games.
+function playRound (e) {
+    const playerSelection = e.srcElement.value.toLocaleLowerCase();
+    const computerSelection = getComputerSelection();
+
+    roundWinner = determineWinner(playerSelection, computerSelection);
+    if (roundWinner === 'Player Wins!') {
+        playerWins++;
+    } else if (roundWinner === 'Computer Wins!') {
+        computerWins++;
+    } else if (roundWinner === 'It is a draw!') {
+        draws++;
+    } else {
+        alert('Could not find out winner. Return was:' +roundWinner);
+    }
+
+    document.querySelector('#your-selection').textContent = "Your Selection: " + playerSelection;
+    document.querySelector('#computer-selection').textContent = "Computer Selection: " + computerSelection;
+    document.querySelector('#round-winner').textContent = roundWinner;
+
+    document.querySelector('#player-wins').textContent = "Player Wins: " + playerWins;
+    document.querySelector('#computer-wins').textContent = "Computer Wins: " + computerWins;
+    document.querySelector('#draws').textContent = "Draws: " + draws;
+/*    document.querySelector('#rounds-played').textContent = "Rounds Played: " + toString.(playerWins + computerWins + draws);*/
+}
+
 function game() {
-    // Set up array to keep track of winner
-    let winner = [];
+    playerWins = 0;
+    computerWins = 0;
+    draws = 0;
 
     /*
     // Loop until we have played 5 games
@@ -66,20 +82,20 @@ function game() {
     }*/
 
     // Count number of wins for player and computer
-    const playerWins = winner.filter(w => w === 'Player wins!').length;
+/*    const playerWins = winner.filter(w => w === 'Player wins!').length;
     const computerWins = winner.filter(w => w === 'Computer wins!').length;
     const draws = winner.filter(w => w === 'It is a draw!').length;
 
-
+*/
     // Count the number of player wins and computer wins and draws and print it
-    console.log('Game Over!\nPlayer Wins: ' + playerWins + 
+    console.log('Game Over!\nPlayer Wins: ' + playerWins +
         '\nComputer Wins: ' + computerWins +
         '\nDraws: ' + draws);
 
     // Find out who the total winner is
     let totalWinner;
     if (playerWins > computerWins) {
-        totalWinner = 'Player';  
+        totalWinner = 'Player';
     } else if (playerWins < computerWins) {
         totalWinner = 'Computer';
     } else {
