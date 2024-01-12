@@ -3,13 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock Paper Scissors</title>
 </head>
 <body>
+    <h1>Rock Paper Scissors</h1>
+    <h2>Select your weapon</h2>
     <button class='selectionButton' type="button" value="rock">Rock</button>
     <button class='selectionButton' type="button" value="paper">Paper</button>
     <button class='selectionButton' type="button" value="scissors">Scissors</button>
 
+    <div id="round-results">
+        <h2>Round Results</h2>
+        <div id="your-selection">Your Selection: </div>
+        <div id="computer-selection">Computer Selection: </div>
+        <div id="round-winner">Winner is: </div>
+    </div>
+    
+    <div id="standing">
+        <h2>Current Score</h2>
+        <div>Player Wins: 0</div>
+        <div>Computer Wins: 0</div>
+        <div>Draws: 0</div>
+        <div>Games Played: 0</div>
+    </div>
+
+    <div>
+        <h2>Game Over!</h2>
+        <div>Winner is: </div>
+    </div>
     <script src="./js/script.js"></script>
 </body>
 </html>
