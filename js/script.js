@@ -35,6 +35,24 @@ function determineWinner (playerSelection, computerSelection) {
     }
 }
 
+function isGameOver() {
+    if (playerWins >= 5 || computerWins >= 5) {
+        document.querySelector('#game-over > h2').textContent = "Game Over!";
+
+        if (playerWins > computerWins) {
+            document.querySelector('#game-over > div').textContent = "You Win!";
+        } else if (computerWins > playerWins) {
+            document.querySelector('#game-over > div').textContent = "Computer Wins!";
+        } else {
+            alert('Error! Could not determine game winner.');
+        }
+
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function playRound (e) {
     const playerSelection = e.srcElement.value.toLocaleLowerCase();
     const computerSelection = getComputerSelection();
@@ -57,53 +75,20 @@ function playRound (e) {
     document.querySelector('#player-wins').textContent = "Player Wins: " + playerWins;
     document.querySelector('#computer-wins').textContent = "Computer Wins: " + computerWins;
     document.querySelector('#draws').textContent = "Draws: " + draws;
-/*    document.querySelector('#rounds-played').textContent = "Rounds Played: " + toString.(playerWins + computerWins + draws);*/
+
+    
+    if (isGameOver()) {
+        newGame();
+    }
 }
 
-function game() {
+function newGame() {
     playerWins = 0;
     computerWins = 0;
     draws = 0;
 
-    /*
-    // Loop until we have played 5 games
-    for (let i = 1; i <= 5; i++) {
-        // Ask player for the selection and store it in playerSelection
-        const playerSelection = prompt('What is your slection?');
-        
-        // get the computerSelection and store it
-        const computerSelection = getComputerSelection();
-
-        // evaluate who won and store it in winner array
-        winner[i] = playRound(playerSelection, computerSelection);
-
-        // Display the winner of the round
-        console.log(winner[i]); 
-    }*/
-
-    // Count number of wins for player and computer
-/*    const playerWins = winner.filter(w => w === 'Player wins!').length;
-    const computerWins = winner.filter(w => w === 'Computer wins!').length;
-    const draws = winner.filter(w => w === 'It is a draw!').length;
-
-*/
-    // Count the number of player wins and computer wins and draws and print it
-    console.log('Game Over!\nPlayer Wins: ' + playerWins +
-        '\nComputer Wins: ' + computerWins +
-        '\nDraws: ' + draws);
-
-    // Find out who the total winner is
-    let totalWinner;
-    if (playerWins > computerWins) {
-        totalWinner = 'Player';
-    } else if (playerWins < computerWins) {
-        totalWinner = 'Computer';
-    } else {
-        totalWinner = 'Noone';
-    }
-
-    // Display the total winner
-    console.log('\nTotal winner is: ' + totalWinner);
+    document.querySelector('#game-over > h2').textContent = "";
+    document.querySelector('#game-over > div').textContent = "";
 }
 
 const selectionButtons = document.querySelectorAll('.selectionButton');
@@ -111,7 +96,7 @@ selectionButtons.forEach(btn => {
     btn.addEventListener('click', playRound);
 });
 
-game();
+newGame();
 
 /* For testing playRound
 const playerSelection = "scissors";
