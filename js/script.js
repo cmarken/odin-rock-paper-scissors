@@ -19,7 +19,7 @@ function determineWinner (playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         return 'It is a draw!';
     } else if (playerSelection === 'rock' && computerSelection === 'paper') {
-        return 'Computer wins!';
+        return 'Computer Wins!';
     } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
         return 'Player Wins!';
     } else if (playerSelection === 'paper' && computerSelection === 'rock') {
@@ -35,7 +35,7 @@ function determineWinner (playerSelection, computerSelection) {
     }
 }
 
-function isGameOver() {
+function checkGameOver() {
     if (playerWins >= 5 || computerWins >= 5) {
         document.querySelector('#game-over > h2').textContent = "Game Over!";
 
@@ -46,6 +46,17 @@ function isGameOver() {
         } else {
             alert('Error! Could not determine game winner.');
         }
+
+        document.querySelector('#play-again > h2').textContent = "Play again?";
+        const replayButton = document.createElement('button');
+        replayButton.textContent = "Yes PLS!";
+        replayButton.addEventListener('click', newGame);
+        document.querySelector("#play-again").appendChild(replayButton);
+
+        const selectionButtons = document.querySelectorAll('.selectionButton');
+        selectionButtons.forEach(btn => {
+            btn.removeEventListener('click', playRound);
+        });
 
         return true;
     } else {
@@ -76,10 +87,7 @@ function playRound (e) {
     document.querySelector('#computer-wins').textContent = "Computer Wins: " + computerWins;
     document.querySelector('#draws').textContent = "Draws: " + draws;
 
-    
-    if (isGameOver()) {
-        newGame();
-    }
+    checkGameOver();
 }
 
 function newGame() {
@@ -87,8 +95,16 @@ function newGame() {
     computerWins = 0;
     draws = 0;
 
+    document.querySelector('#player-wins').textContent = "Player Wins: " + playerWins;
+    document.querySelector('#computer-wins').textContent = "Computer Wins: " + computerWins;
+    document.querySelector('#draws').textContent = "Draws: " + draws;
+
     document.querySelector('#game-over > h2').textContent = "";
     document.querySelector('#game-over > div').textContent = "";
+
+    document.querySelector('#play-again > h2').textContent = "";
+    document.querySelector('#play-again > button').remove();
+
 }
 
 const selectionButtons = document.querySelectorAll('.selectionButton');
